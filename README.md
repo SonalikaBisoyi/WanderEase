@@ -11,6 +11,6 @@
 # Weekly Report-
  ## First Week:We have made the basic structure for project using CHAKRA UI i.e. Homepage and Login and Signup 
 # TEAM MEMBERS -
-   Sonalika Bisoyi
-   Abrar Ahemmad
-   Sneha Sruti Sahu 
+  ## Sonalika Bisoyi
+  ## Abrar Ahemmad
+  ## Sneha Sruti Sahu 
