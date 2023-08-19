@@ -374,7 +374,8 @@ export default function Index() {
         },
       ];
   const [reviews, setReviews] = useState([]);
-  const [setIsAddReviewOpen] = useState(false);
+  const setIsAddReviewOpen = useState(false);
+
 
   useEffect(() => {
     // Fetch reviews data from the backend API
@@ -455,7 +456,7 @@ export default function Index() {
           ))}
         </Slider>
       </Box>
-
+      <Text fontSize="5xl">Voices</Text>
       <Slider {...settings}>
         {reviews.map(review => (
           <ReviewCard key={review.id} review={review} />

@@ -68,6 +68,7 @@ class ReviewsController {
   static async getAllReviews(req, res) {
     try {
       const reviews = await CustomerReview.findAll();
+      
       res.json(reviews);
     } catch (error) {
       console.error('Error fetching reviews:', error); // Add this line

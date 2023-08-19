@@ -161,7 +161,7 @@ const Footer = () => {
                 <Icon as={FiHome} mr={2} />
                 Home
               </Link>
-              <Link>
+              <Link href="/aboutus">
                 <Icon as={FiInfo} mr={2} />
                 About Us
               </Link>
@@ -173,7 +173,7 @@ const Footer = () => {
                 <Icon as={FiMail} mr={2} />
                 Newsletter
               </Link>
-              <Link>
+              <Link href="/contactus">
                 <Icon as={FiPhone} mr={2} />
                 Contact Us
               </Link>
@@ -191,7 +191,7 @@ const Footer = () => {
                 <Icon as={FiLock} mr={2} />
                 Terms of Use
               </Link>
-              <Link>
+              <Link href='/faq'>
                 <Icon as={FiHelpCircle} mr={2} />
                 FAQs
               </Link>

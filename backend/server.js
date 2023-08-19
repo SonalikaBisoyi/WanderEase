@@ -95,11 +95,13 @@
 const express = require('express');
 const cors = require('cors');
 const reviewsRoutes = require('./routes/reviews'); // Import your reviews routes
+const authRoutes = require('./routes/auth.js'); // Import your reviews routes
 const { sequelize } = require('./db'); // Import sequelize instance
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true })); 
 
 // Synchronize models with the database
 (async () => {
@@ -109,6 +111,7 @@ app.use(express.json());
 
 // Use your reviews routes under the '/api' endpoint
 app.use('/api', reviewsRoutes);
+app.use('/api', authRoutes);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

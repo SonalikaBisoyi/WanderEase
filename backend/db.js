@@ -32,8 +32,11 @@ const sequelize = new Sequelize(
 // Load and define the CustomerReview model
 const defineCustomerReviewModel = require('./models/customerReviews');
 const CustomerReview = defineCustomerReviewModel(sequelize);
+const defineUserModel = require('./models/user');
+const User = defineUserModel(sequelize);
 
 module.exports = {
   sequelize,
   CustomerReview,
+  User,
 };

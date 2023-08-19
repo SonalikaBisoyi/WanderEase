@@ -171,6 +171,7 @@ const AddReviewForm = ({ onReviewAdded }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [newReview, setNewReview] = useState({
     customerName: '',
+    customerImage:'',
     date: '',
     opinion: '',
   });
@@ -194,6 +195,7 @@ const AddReviewForm = ({ onReviewAdded }) => {
         // Reset the newReview state
         setNewReview({
           customerName: '',
+          customerImage:'',
           date: '',
           opinion: '',
         });
@@ -225,6 +227,13 @@ const AddReviewForm = ({ onReviewAdded }) => {
               value={newReview.customerName}
               onChange={e =>
                 setNewReview({ ...newReview, customerName: e.target.value })
+              }
+            />
+            <Input
+              placeholder="Image"
+              value={newReview.customerImage}
+              onChange={e =>
+                setNewReview({ ...newReview, customerImage: e.target.value })
               }
             />
             <Input
