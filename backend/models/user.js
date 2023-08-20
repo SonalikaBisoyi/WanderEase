@@ -21,7 +21,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
   },{
-    timestamps: false, // This disables the automatic timestamp columns
+    timestamps: false, 
   });
   console.log("458");
   console.log(user);
