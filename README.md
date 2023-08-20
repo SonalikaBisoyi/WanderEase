@@ -9,7 +9,7 @@
   ## Express js
   ## MySql
 # Weekly Report-
- ## First Week:We have made the basic structure for project using CHAKRA UI i.e. Homepage and Login and Signup 
+ ## First Week:We have made the basic structure for project using CHAKRA UI i.e. Homepage,Contact us,about us and Login and Signup 
 # TEAM MEMBERS -
   ## Sonalika Bisoyi
   ## Abrar Ahemmad
