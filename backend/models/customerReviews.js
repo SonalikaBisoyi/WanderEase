@@ -24,7 +24,7 @@ module.exports = (sequelize) => {
     },
 
     }, {
-    timestamps: false;
+    timestamps: false,
   });
   return CustomerReview;
 };
