@@ -21,7 +21,6 @@ function LoginPage() {
       console.log('Login response:', data);
 
       if (response.ok) {
-        // Login successful, redirect to another page
         <Link to='/'/>
       }
     } catch (error) {
