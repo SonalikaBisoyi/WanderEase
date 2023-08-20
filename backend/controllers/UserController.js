@@ -21,14 +21,11 @@ class UserController {
     console.log('Received a registration request');
 
     try {
-      // Find the user by username
       const user = await User.findOne({ where: { username } });
 
       if (!user) {
         return res.status(401).json({ message: 'Invalid credentials' });
       }
-
-      // Compare the provided password with the hashed password
       const passwordMatch = await bcrypt.compare(password, user.password);
 
       if (!passwordMatch) {
