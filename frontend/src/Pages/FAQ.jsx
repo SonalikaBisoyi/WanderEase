@@ -15,7 +15,7 @@ const FAQPage = () => {
       question: "Can I edit my travel plans after creating them?",
       answer: "Yes, you can edit your travel plans at any time by logging into your account and accessing your itineraries.",
     },
-    // Add more FAQ items as needed
+    
   ];
 
   return (
