@@ -1,14 +1,13 @@
-
-
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Heading, Image, VStack } from '@chakra-ui/react';
 
 export default function Site() {
-  const { cityId } = useParams(); 
+  const { cityId } = useParams(); // Extract cityId from URL parameter
   const [sites, setSites] = useState([]);
 
   useEffect(() => {
+    // Fetch data from your API using the provided cityId
     fetch(`http://localhost:3001/api/sites/${cityId}`)
       .then(response => response.json())
       .then(data => setSites(data))

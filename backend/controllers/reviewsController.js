@@ -1,10 +1,4 @@
-
-const { sequelize } = require('../db'); 
-const CustomerReview = require('../models/customerReviews')(sequelize);
-console.log(CustomerReview);
-console.log("456");
-//const db = require('../db');
-//console.log(db);
+const { CustomerReview } = require('../db'); 
 class ReviewsController {
   static async getAllReviews(req, res) {
     try {

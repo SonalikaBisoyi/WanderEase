@@ -34,7 +34,6 @@ const AddReviewForm = ({ onReviewAdded }) => {
     })
       .then(response => response.json())
       .then(data => {
-        
         onReviewAdded(data);
         setNewReview({
           customerName: '',

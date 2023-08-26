@@ -3,11 +3,15 @@ const jwt = require('jsonwebtoken');
 const { sequelize } = require('../db'); 
 const User = require('../models/user')(sequelize); 
 console.log("hi",User);
+
 exports.registerUser = async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
+    
     const hashedPassword = await bcrypt.hash(password, 10);
+
+    
     const newUser = await User.create({
       username,
       email,
@@ -20,6 +24,8 @@ exports.registerUser = async (req, res) => {
     res.status(500).json({ message: 'An error occurred' });
   }
 };
+
+
 exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
   console.log(req.body);
@@ -31,7 +37,7 @@ exports.loginUser = async (req, res) => {
       return res.status(401).json({ message: 'email Invalid credentials' });
     }
 
-    
+   
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
