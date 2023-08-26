@@ -1,153 +1,194 @@
-import React from 'react';
-import {
-  Box,
-  Container,
-  Flex,
-  Text,
-  Link,
-  VStack,
-  HStack,
-  Icon,
-  SimpleGrid,
-} from '@chakra-ui/react';
-import {
-  FiHome,
-  FiInfo,
-  FiBook,
-  FiMail,
-  FiPhone,
-  FiLock,
-  FiHelpCircle,
-} from 'react-icons/fi';
-import {
-  FaTwitter,
-  FaYoutube,
-  FaInstagram,
-  FaFacebook,
-} from 'react-icons/fa';
+const [data, setData] = useState([]);
 
-const stateNames = [
-  'Andhra Pradesh',
-  'Arunachal Pradesh',
-  'Assam',
-  'Bihar',
-  'Chhattisgarh',
-  'Goa',
-  'Gujarat',
-  'Haryana',
-  'Himachal Pradesh',
-  'Jharkhand',
-  'Karnataka',
-  'Kerala',
-  'Madhya Pradesh',
-  'Maharashtra',
-  'Manipur',
-  'Meghalaya',
-  'Mizoram',
-  'Nagaland',
-  'Odisha',
-  'Punjab',
-  'Rajasthan',
-  'Sikkim',
-  'Tamil Nadu',
-  'Telangana',
-  'Tripura',
-  'Uttar Pradesh',
-  'Uttarakhand',
-  'West Bengal',
-];
-
-const Footer = () => {
-  return (
-    <Box bg="gray.800" color="white" py={10}>
-      <Container maxW="full">
-        <Flex direction="column" align="center" justify="center">
-          <Box w="100%" mb={8}>
-            <VStack align="center" spacing={4}>
-              <Text fontWeight="bold">States</Text>
-              <SimpleGrid columns={{ base: 2, md: 5 }} spacing={2}>
-                {stateNames.map((stateName, index) => (
-                  <Link key={index}>{stateName}</Link>
-                ))}
-              </SimpleGrid>
-            </VStack>
-          </Box>
-
-          <Box w="100%" mb={8}>
-            <VStack align="center" spacing={4}>
-              <Text fontWeight="bold">Navigation</Text>
-              <Link>
-                <Icon as={FiHome} mr={2} />
-                Home
-              </Link>
-              <Link href="/aboutus">
-                <Icon as={FiInfo} mr={2} />
-                About Us
-              </Link>
-              <Link>
-                <Icon as={FiBook} mr={2} />
-                Blog
-              </Link>
-              <Link>
-                <Icon as={FiMail} mr={2} />
-                Newsletter
-              </Link>
-              <Link href="/contactus">
-                <Icon as={FiPhone} mr={2} />
-                Contact Us
-              </Link>
-            </VStack>
-          </Box>
-
-          <Box w="100%" mb={8}>
-            <VStack align="center" spacing={4}>
-              <Text fontWeight="bold">Quick Links</Text>
-              <Link>
-                <Icon as={FiLock} mr={2} />
-                Privacy Policy
-              </Link>
-              <Link>
-                <Icon as={FiLock} mr={2} />
-                Terms of Use
-              </Link>
-              <Link href='/faq'>
-                <Icon as={FiHelpCircle} mr={2} />
-                FAQs
-              </Link>
-            </VStack>
-          </Box>
-
-          <Box w="100%" mb={8}>
-            <VStack align="center" spacing={4}>
-              <Text fontWeight="bold">Follow Us</Text>
-              <HStack spacing={4}>
-                <Link>
-                  <Icon as={FaInstagram} />
-                </Link>
-                <Link>
-                  <Icon as={FaTwitter} />
-                </Link>
-                <Link>
-                  <Icon as={FaYoutube} />
-                </Link>
-                <Link>
-                  <Icon as={FaFacebook} />
-                </Link>
-              </HStack>
-            </VStack>
-          </Box>
-        </Flex>
-
-        <Box mt={8} textAlign="center">
-          <Text>
-            &copy; {new Date().getFullYear()} Your Company. All rights
-            reserved.
-          </Text>
-        </Box>
-      </Container>
-    </Box>
-  );
+const handleSearchToggle = () => {
+  setIsSearchOpen(!isSearchOpen);
 };
+useEffect(() => {
+  // Fetch data from your API
+  fetch('http://localhost:3001/api/states/regions')
+    .then(response => response.json())
+    .then(data => setData(data))
+    .catch(error => console.error('Fetching error:', error));
+}, []);
+console.log(data);
+//top={0} zIndex={1000} p={4} justifyContent="space-between" alignItems="center" boxShadow="md"
+  return (
+    <><Flex position="sticky"   px={[2, 4, 8]} h={16} bg={useColorModeValue('gray.100', 'gray.900')}>
+        <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4} w="100%">
+          <Flex h={16} alignItems={'center'} justifyContent={'space-between'} px={4} w="100%">
+            <Box> 
+              <Link to="/" >
+               <Text>WanderEase</Text>
+              </Link>
+            </Box>
+            <Flex alignItems={'center'}>
+              <IconButton
+                aria-label="Toggle menu"
+                icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+                variant="ghost"
+                display={{ base: 'block', md: 'none' }}
+                onClick={isOpen ? onClose : onOpen}/>
+                <Flex alignItems={'center'} >
+                  <Stack direction={'row'} spacing={7}>
+                    <Popover placement="left" isLazy z-index ='9999' position='absolute'>
+                      <PopoverTrigger>
+                        <Button rightIcon={<ChevronDownIcon />} w="fit-content"  display={{ base: 'none', md: 'flex' }}>
+                          WanderLust Stops
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent >
+                      <PopoverArrow />
+                      <PopoverCloseButton />
+                      <PopoverHeader fontWeight="bold" >Let's Explore</PopoverHeader>
+                      <PopoverBody w="full">
+                      <Tabs isLazy>
+  <TabList>
+    {data.map(region => (
+      <Tab key={region.region}>{region.region}</Tab>
+    ))}
+  </TabList>
+  <TabPanels>
+    {data.map(region => (
+      <TabPanel key={region.region}>
+        <Tabs isLazy>
+          <TabList>
+            {Object.keys(region.states).map(state => (
+              <Tab key={state}>{state}</Tab>
+            ))}
+          </TabList>
+          <TabPanels>
+            {Object.keys(region.states).map(state => (
+              <TabPanel key={state}>
+                {region.states[state].map(city => (
+                  <p key={city}>{city}</p>
+                ))}
+              </TabPanel>
+            ))}
+          </TabPanels>
+        </Tabs>
+      </TabPanel>
+    ))}
+  </TabPanels>
+</Tabs>
 
-export default Footer;
 
+                      </PopoverBody>
+                    </PopoverContent>
+                  </Popover>
+      
+      <Button ml={4}  display={{ base: 'none', md: 'flex' }}>
+        Insights
+      </Button>
+      <Button ml={4}  display={{ base: 'none', md: 'flex' }} >
+        Diaries
+      </Button>
+      <Button ml={4} onClick={handleSearchToggle}  display={{ base: 'none', md: 'flex' }}>
+        <SearchIcon />
+      </Button>
+      {isSearchOpen && (
+        <Input
+          placeholder="Search"
+          w="200px"
+          ml={4}
+          variant="filled"
+          size="sm"
+          display={{ base: 'none', md: 'flex' }}
+        />
+      )}
+        <Button onClick={toggleColorMode}>
+                {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+              </Button>
+        <Link to='/login'>
+          <Button><Avatar
+                    size={'sm'}
+                    src={'https://avatars.dicebear.com/api/male/username.svg'}
+                  /></Button>
+        </Link>
+             
+            </Stack>
+          </Flex>
+        </Flex>
+        </Flex>
+      </Box>
+              
+      {/* Drawer for small screens */}
+      <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
+        <DrawerOverlay>
+          <DrawerContent>
+            <DrawerCloseButton />
+            <DrawerHeader>Menu</DrawerHeader>
+            <DrawerBody>
+              <Stack spacing={4}>
+              <Popover placement="bottom" isLazy z-index ='1000'>
+                      <PopoverTrigger>
+                        <Button rightIcon={<ChevronDownIcon />} w="fit-content">
+                          WanderLust Stops
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent >
+                      <PopoverArrow />
+                      <PopoverCloseButton />
+                      <PopoverHeader fontWeight="bold" >Let's Explore</PopoverHeader>
+                      <PopoverBody w="full">
+                      <Tabs isLazy>
+  <TabList>
+    {data.map(region => (
+      <Tab key={region.region}>{region.region}</Tab>
+    ))}
+  </TabList>
+  <TabPanels>
+    {data.map(region => (
+      <TabPanel key={region.region}>
+        <Tabs isLazy>
+          <TabList>
+            {Object.keys(region.states).map(state => (
+              <Tab key={state}>{state}</Tab>
+            ))}
+          </TabList>
+          <TabPanels>
+            {Object.keys(region.states).map(state => (
+              <TabPanel key={state}>
+                {region.states[state].map(city => (
+                  <Link key={city} to={`/sites/${city.city_id}`}>
+                  <p>{city}</p>
+                </Link>
+                ))}
+              </TabPanel>
+            ))}
+          </TabPanels>
+        </Tabs>
+      </TabPanel>
+    ))}
+  </TabPanels>
+</Tabs>
+
+
+                      </PopoverBody>
+                    </PopoverContent>
+                  </Popover>
+                
+                <Button>Insights</Button>
+                <Button>Diaries</Button>
+                <Button ml={4} onClick={handleSearchToggle}>
+        <SearchIcon />
+      </Button>
+      {isSearchOpen && (
+        <Input
+          placeholder="Search"
+          w="200px"
+          ml={4}
+          variant="filled"
+          size="sm"
+        />
+      )}
+              </Stack>
+            </DrawerBody>
+          </DrawerContent>
+        </DrawerOverlay>
+      </Drawer>
+      </Flex>
+    </>
+  );
+}
+
+export default Nav;
