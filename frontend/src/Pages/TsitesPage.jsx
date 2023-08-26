@@ -1,26 +1,25 @@
-
-
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Heading, Image, VStack } from '@chakra-ui/react';
+import { Box, Heading, SimpleGrid, Image, Stack } from '@chakra-ui/react';
 
-export default function Site() {
-  const { cityId } = useParams(); 
+export default function TsitesPage() {
+  const { tourismType } = useParams();
   const [sites, setSites] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:3001/api/sites/${cityId}`)
+    fetch(`http://localhost:3001/api/sites/tourism_type/${tourismType}`)
       .then(response => response.json())
       .then(data => setSites(data))
       .catch(error => console.error('Fetching error:', error));
-  }, [cityId]);
+  }, [tourismType]);
+  console.log('TSites',sites);
 
   return (
     <Box p={8}>
       <Heading as="h1" mb={4}>
-        Sites in City ID: {cityId}
+        Sites for Tourism Type: {tourismType}
       </Heading>
-      <VStack spacing={4}>
+      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
         {sites.map(site => (
           <Box
             key={site.site_id}
@@ -32,13 +31,15 @@ export default function Site() {
             _hover={{ transform: 'scale(1.05)' }}
           >
             <Image src={site.image1} alt={site.name} />
-            <Heading as="h2" mt={2} fontSize="lg">
-              {site.name}
-            </Heading>
+            <Stack mt={2}>
+              <Heading as="h2" fontSize="lg">
+                {site.name}
+              </Heading>
+              <p>Tourism Type: {site.tourism_type}</p>
+            </Stack>
           </Box>
         ))}
-      </VStack>
+      </SimpleGrid>
     </Box>
   );
 }
-

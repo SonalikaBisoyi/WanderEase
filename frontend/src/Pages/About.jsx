@@ -10,7 +10,7 @@ const AboutUsPage = () => {
           About Us
         </Heading>
         <Text fontSize="lg" mb="4">
-          Welcome to TravelPlanner! We are a passionate team of travel enthusiasts
+          Welcome to WanderEase! We are a passionate team of travel enthusiasts
           dedicated to helping you plan your dream vacations.
         </Text>
         <Text fontSize="lg" mb="4">
