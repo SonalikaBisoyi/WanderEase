@@ -1,3 +1,72 @@
+import React, { useState ,useEffect} from 'react';
+import {
+  Box,
+  Flex,
+  Avatar,
+  Text,
+  Button,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuDivider,
+  useDisclosure,
+  useColorModeValue,
+  Stack,
+  useColorMode,
+  Center,
+  Image,
+} from '@chakra-ui/react';
+import { MoonIcon, SunIcon ,HamburgerIcon,
+  CloseIcon,} from '@chakra-ui/icons';
+import { Link } from 'react-router-dom'; 
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverBody,
+  PopoverArrow,
+  PopoverCloseButton,
+  Tabs,
+  TabList,
+  Tab,
+  TabPanels,
+  TabPanel,
+  Input,IconButton,
+  Drawer,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  DrawerBody,
+  DrawerHeader,
+} from '@chakra-ui/react';
+import { ChevronDownIcon, SearchIcon } from '@chakra-ui/icons';
+const NavLink = (props) => {
+  const { children } = props;
+
+
+  return (
+    <Box
+      as="a"
+      px={2}
+      py={1}
+      rounded={'md'}
+      _hover={{
+        textDecoration: 'none',
+        bg: useColorModeValue('gray.200', 'gray.700'),
+      }}
+      href={'#'}
+    >
+      {children}
+    </Box>
+  );
+};
+
+function Nav() {
+  const { colorMode, toggleColorMode } = useColorMode();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+const [isSearchOpen, setIsSearchOpen] = useState(false);
 const [data, setData] = useState([]);
 
 const handleSearchToggle = () => {
@@ -11,6 +80,9 @@ useEffect(() => {
     .catch(error => console.error('Fetching error:', error));
 }, []);
 console.log(data);
+const getCityId = (cityName, cityIdMapping) => {
+  return cityIdMapping[cityName] || ''; // Return empty string if cityIdMapping doesn't have the city
+};
 //top={0} zIndex={1000} p={4} justifyContent="space-between" alignItems="center" boxShadow="md"
   return (
     <><Flex position="sticky"   px={[2, 4, 8]} h={16} bg={useColorModeValue('gray.100', 'gray.900')}>
@@ -59,8 +131,11 @@ console.log(data);
           <TabPanels>
             {Object.keys(region.states).map(state => (
               <TabPanel key={state}>
-                {region.states[state].map(city => (
-                  <p key={city}>{city}</p>
+                {region.states[state].map(cityName => (
+                  // Access the city_id using a function or lookup
+                  <Link key={cityName} to={`/sites/${getCityId(cityName, region.cityIdMapping)}`}>
+                    <p>{cityName}</p>
+                  </Link>
                 ))}
               </TabPanel>
             ))}
@@ -130,7 +205,8 @@ console.log(data);
                       <PopoverCloseButton />
                       <PopoverHeader fontWeight="bold" >Let's Explore</PopoverHeader>
                       <PopoverBody w="full">
-                      <Tabs isLazy>
+      
+<Tabs isLazy>
   <TabList>
     {data.map(region => (
       <Tab key={region.region}>{region.region}</Tab>
@@ -148,10 +224,11 @@ console.log(data);
           <TabPanels>
             {Object.keys(region.states).map(state => (
               <TabPanel key={state}>
-                {region.states[state].map(city => (
-                  <Link key={city} to={`/sites/${city.city_id}`}>
-                  <p>{city}</p>
-                </Link>
+                {region.states[state].map(cityName => (
+                  // Access the city_id using a function or lookup
+                  <Link key={cityName} to={`/sites/${getCityId(cityName, region.cityIdMapping)}`}>
+                    <p>{cityName}</p>
+                  </Link>
                 ))}
               </TabPanel>
             ))}
@@ -191,4 +268,5 @@ console.log(data);
   );
 }
 
-export default Nav;
+export default Nav;
+
