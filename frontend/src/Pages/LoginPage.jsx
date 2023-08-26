@@ -34,7 +34,6 @@ function LoginPage() {
       console.log('Login response:', data);
 
       if (response.ok) {
-        // Login successful, redirect to another page
         console.log('login success');
         setSuccess(true);
       }
@@ -54,7 +53,7 @@ function LoginPage() {
           <Stack align={'center'}>
             <Heading fontSize={'4xl'}>Sign in to your account</Heading>
             <Text fontSize={'lg'} color={'gray.600'}>
-              to enjoy all of our cool <Text color={'blue.400'}>features</Text> ✌
+              to enjoy all of our cool <Text color={'blue.400'}>features</Text> ✌️
             </Text>
           </Stack>
           <Box rounded={'lg'} boxShadow={'lg'} p={8}>
@@ -110,4 +109,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default LoginPage;
