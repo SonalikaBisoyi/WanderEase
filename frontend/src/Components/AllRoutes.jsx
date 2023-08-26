@@ -8,6 +8,8 @@ import Footer from '../Components/Footer';
 import Contactus from '../Pages/Contactus';
 import About from '../Pages/About';
 import FAQ from '../Pages/FAQ';
+import Sites from '../Pages/Sites';
+import TsitesPage from '../Pages/TsitesPage';
 const AllRoutes = () => {
     return (
     <div>
@@ -19,6 +21,8 @@ const AllRoutes = () => {
            <Route path='/contactus'  element={<Contactus/>}></Route>
            <Route path='/aboutus'  element={<About/>}></Route>
            <Route path='/faq'  element={<FAQ/>}></Route>
+           <Route path="/sites/:cityId" element={<Sites/>}></Route> 
+           <Route path="/sites/tourism_type/:tourismType" element={<TsitesPage/>}></Route> 
            
       </Routes>
        <Footer/>
