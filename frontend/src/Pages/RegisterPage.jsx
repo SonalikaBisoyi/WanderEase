@@ -71,7 +71,7 @@ export default function RegisterPage() {
             Sign up
           </Heading>
           <Text fontSize={'lg'} color={'gray.600'}>
-            to enjoy all of our cool features ✌
+            to enjoy all of our cool features ✌️
           </Text>
         </Stack>
         <Box
@@ -135,6 +135,6 @@ export default function RegisterPage() {
           </form>
         </Box>
       </Stack>
-    </Flex>
-  );
+    </Flex>
+  );
 }
