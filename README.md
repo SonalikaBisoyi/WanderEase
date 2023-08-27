@@ -10,6 +10,7 @@
   ## MySql
 # Weekly Report-
  ## First Week:We have made the basic structure for project using CHAKRA UI i.e. Homepage,Contact us,about us and Login and Signup 
+ ## Second Week:We have remodelled our navbar,footer and homepage and have added all the necessary models in the backend
 # TEAM MEMBERS -
   ## Sonalika Bisoyi
   ## Abrar Ahemmad
