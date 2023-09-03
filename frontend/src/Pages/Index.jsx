@@ -1,3 +1,202 @@
+// import React, { useRef, useEffect, useState } from 'react';
+// import {
+//   Box,
+//   IconButton,
+//   useBreakpointValue,
+//   Stack,
+//   Heading,
+//   Text,
+//   Container,
+// } from '@chakra-ui/react';
+// import {
+//   BiArrowToLeft,
+//   BiArrowToRight,
+// } from 'react-icons/bi';
+// import Slider from 'react-slick';
+// import 'slick-carousel/slick/slick.css';
+// import 'slick-carousel/slick/slick-theme.css';
+// import AddReviewForm from '../Components/AddReviewForm';
+// import ReviewCard from '../Components/ReviewCard';
+// import { AddIcon } from '@chakra-ui/icons';
+
+// const settings = {
+//   dots: true,
+//   arrows: false,
+//   fade: true,
+//   infinite: true,
+//   autoplay: true,
+//   speed: 500,
+//   autoplaySpeed: 5000,
+//   slidesToShow: 1,
+//   slidesToScroll: 1,
+// };
+
+// export default function Index() {
+//   const sliderRef = useRef(null);
+
+//   const top = useBreakpointValue({ base: '90%', md: '50%' });
+//   const side = useBreakpointValue({ base: '10px', md: '40px' });
+
+//   const cards = [
+//         {
+//           title: 'Design Projects 1',
+//           text: "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
+//           image:
+//             'https://images.unsplash.com/photo-1517427677506-ade074eb1432?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGxhY2VzJTIwdG8lMjB2aXNpdCUyMGluJTIwaW5kaWF8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=600&q=60',
+//         },
+//         {
+//           title: 'Design Projects 2',
+//           text: "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
+//           image:
+//             'https://images.unsplash.com/photo-1506461883276-594a12b11cf3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cGxhY2VzJTIwdG8lMjB2aXNpdCUyMGluJTIwaW5kaWF8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=600&q=60',
+//         },
+//         {
+//           title: 'Design Projects 3',
+//           text: "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
+//           image:
+//             'https://images.unsplash.com/photo-1591949334567-0bed0d0dc660?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHBsYWNlcyUyMHRvJTIwdmlzaXQlMjBpbiUyMGluZGlhfGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60',
+//         },
+//       ];
+//   const [reviews, setReviews] = useState([]);
+//   const setIsAddReviewOpen = useState(false);
+
+
+//   useEffect(() => {
+//     // Fetch reviews data from the backend API
+//     fetch('http://localhost:3001/api/reviews')
+//       .then(response => response.json())
+//       .then(data => {
+//         setReviews(data);
+//       })
+//       .catch(error => {
+//         console.error('Error fetching reviews:', error);
+//       });
+//   }, []);
+
+//   const handleAddReviewClick = () => {
+//     setIsAddReviewOpen(true);
+//   };
+
+//   const handleAddReviewClose = () => {
+//     setIsAddReviewOpen(false);
+//   };
+ 
+//   return (
+//     <div>
+//        <Box position={'relative'} height={'400px'} width={'full'} overflow={'hidden'} zIndex={10}>
+//         <IconButton
+//           aria-label="left-arrow"
+//           variant="ghost"
+//           position="absolute"
+//           left={side}
+//           top={top}
+//           transform={'translate(0%, -50%)'}
+//           zIndex={2}
+//           onClick={() => sliderRef.current?.slickPrev()}
+//         >
+//           <BiArrowToLeft size="32px" />
+//         </IconButton>
+//         <IconButton
+//           aria-label="right-arrow"
+//           variant="ghost"
+//           position="absolute"
+//           right={side}
+//           top={top}
+//           transform={'translate(0%, -50%)'}
+//           zIndex={2}
+//           onClick={() => sliderRef.current?.slickNext()}
+//         >
+//           <BiArrowToRight size="32px" />
+//         </IconButton>
+//         <Slider {...settings} ref={sliderRef}>
+//           {cards.map((card, index) => (
+//             <Box
+//               key={index}
+//               zIndex={10}
+//               height={'400px'}
+//               position="relative"
+//               backgroundPosition="center"
+//               backgroundRepeat="no-repeat"
+//               backgroundSize="cover"
+//               backgroundImage={`url(${card.image})`}
+//             >
+//               <Container size="container.lg" height="400px" position="relative">
+//                 <Stack
+//                   spacing={4}
+//                   w={'full'}
+//                   maxW={'lg'}
+//                   position="absolute"
+//                   top="50%"
+//                   transform="translate(0, -50%)"
+//                 >
+//                   <Heading fontSize={{ base: '2xl', md: '3xl', lg: '4xl' }}>
+//                     {card.title}
+//                   </Heading>
+//                   <Text fontSize={{ base: 'sm', lg: 'md' }} color="gray.600">
+//                     {card.text}
+//                   </Text>
+//                 </Stack>
+//               </Container>
+//             </Box>
+//           ))}
+//         </Slider>
+//       </Box> 
+//        <Box position={'relative'} height={'400px'} width={'full'} overflow={'hidden'} zIndex={1}>
+//   <Slider {...settings} ref={sliderRef}>
+//     {cards.map((card, index) => (
+//       <Box
+//         key={index}
+//         zIndex={1} // Change the zIndex to 1
+//         height={'400px'}
+//         position="relative"
+//         backgroundPosition="center"
+//         backgroundRepeat="no-repeat"
+//         backgroundSize="cover"
+//         backgroundImage={`url(${card.image})`}
+//       >
+//         <Container size="container.lg" height="400px" position="relative">
+//           <Stack
+//             spacing={4}
+//             w={'full'}
+//             maxW={'lg'}
+//             position="absolute"
+//             top="50%"
+//             transform="translate(0, -50%)"
+//           >
+//             <Heading fontSize={{ base: '2xl', md: '3xl', lg: '4xl' }}>
+//               {card.title}
+//             </Heading>
+//             <Text fontSize={{ base: 'sm', lg: 'md' }} color="gray.600">
+//               {card.text}
+//             </Text>
+//           </Stack>
+//         </Container>
+//       </Box>
+//     ))}
+//   </Slider>
+// </Box>
+
+//       <Text fontSize="5xl">Voices</Text>
+//       <Slider {...settings}>
+//         {reviews.map(review => (
+//           <ReviewCard key={review.id} review={review} />
+//         ))}
+//       </Slider>
+
+//       <IconButton
+//         aria-label="Add Review"
+//         variant="ghost"
+//         position="absolute"
+//         left={side}
+//         top={top}
+//         transform={'translate(0%, -50%)'}
+//         zIndex={2}
+//         onClick={handleAddReviewClick} />
+
+//       <AddReviewForm onReviewAdded={handleAddReviewClose} />
+//     </div>
+//   );
+//  } 
 'use client'
 import React,{useEffect,useState} from 'react';
 import {
@@ -259,6 +458,7 @@ const srces = [
   </Heading>
   <Flex mt={4} flexWrap="wrap">
     {popularSites.map((popularSite) => (
+      <Link key={popularSite.popularSiteId} to={`/site/${popularSite.popularSiteId}`}>
       <Box
         key={popularSite.popularSiteId}
         p={4}
@@ -298,7 +498,9 @@ const srces = [
         >
           {popularSite.siteName} {/* Display the site name */}
         </Text>
+        
       </Box>
+      </Link>
     ))}
   </Flex>
 </Box>
@@ -380,10 +582,11 @@ const srces = [
   </Heading>
   <Flex flexWrap="wrap" justifyContent="center">
     {tourismTypes.map(tourismType => (
+       <Link to={`/sites/tourism_type/${tourismType.name}`} key={tourismType.name}>
       <Box
         key={tourismType.name}
         p={4}
-        width="calc(33.33% - 32px)" // Adjust width as needed
+        width="calc(33.33% - 32px)" 
         margin="16px"
         borderWidth={1}
         borderRadius="lg"
@@ -419,7 +622,9 @@ const srces = [
           {tourismType.name}
         </Text>
       </Box>
+      </Link>
     ))}
+    
   </Flex>
 </Box>
 

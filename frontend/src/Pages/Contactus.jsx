@@ -8,6 +8,7 @@ const Contact = () => {
       bgImage="https://img.freepik.com/free-photo/top-view-chat-bubbles-with-telephone-receiver-copy-space_23-2148796078.jpg?w=826&t=st=1692480421~exp=1692481021~hmac=747bdf56c99da89ad5b78f9103ca2bfb4896bb8e38971b0debd009278ca59ff1"
       bgSize="cover"
     >
+      {/*<Container marginTop="6rem" textAlign="center">*/}
       <Text fontSize="6xl" textAlign="center">Feel Free to Contact us</Text>
 
         <Flex justifyContent="space-between">

@@ -2,7 +2,7 @@ const { sequelize } = require('../db');
 const  PopularSite  = require('../models/popularSites')(sequelize); // Import the PopularSite model
 const Site = require('../models/sites')(sequelize);
 console.log('cont',Site)
-
+// Get all popular sites
 exports.getAllPopularSites = async (req, res) => {
   try {
     const popularSites = await PopularSite.findAll();
@@ -10,7 +10,7 @@ exports.getAllPopularSites = async (req, res) => {
     const detailedPopularSites = await Promise.all(
       popularSites.map(async (popularSite) => {
         const site = await Site.findByPk(popularSite.site_id, {
-          attributes: ['name', 'image1'], 
+          attributes: ['name', 'image1'], // Add the image attributes
         });
         return {
           popularSiteId: popularSite.id,

@@ -10,5 +10,6 @@ const siteController = require('../controllers/siteController');
 // router.delete('/:siteId', siteController.deleteSite);
 router.get('/:cityId', siteController.getSitesByCityId);
 router.get('/tourism_type/:tourismType', siteController.getSitesByTourismType);
+router.put('/updateSite/:siteId', siteController.updateSiteDetails);
 //router.get('/:siteId', siteController.getSiteDetails);
 module.exports = router;

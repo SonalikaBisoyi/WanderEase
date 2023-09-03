@@ -7,6 +7,7 @@ export default function TsitesPage() {
   const [sites, setSites] = useState([]);
 
   useEffect(() => {
+    // Fetch data from your API using the selected tourism type
     fetch(`http://localhost:3001/api/sites/tourism_type/${tourismType}`)
       .then(response => response.json())
       .then(data => setSites(data))

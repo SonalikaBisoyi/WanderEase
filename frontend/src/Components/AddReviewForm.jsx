@@ -25,6 +25,7 @@ const AddReviewForm = ({ onReviewAdded }) => {
   const handleClose = () => setIsOpen(false);
 
   const handleSubmitReview = () => {
+    // Send the new review data to the backend API
     fetch('http://localhost:3001/api/reviews', {
       method: 'POST',
       headers: {
@@ -34,13 +35,16 @@ const AddReviewForm = ({ onReviewAdded }) => {
     })
       .then(response => response.json())
       .then(data => {
+        // Notify parent component that a new review has been added
         onReviewAdded(data);
+        // Reset the newReview state
         setNewReview({
           customerName: '',
           customerImage:'',
           date: '',
           opinion: '',
         });
+        // Close the modal
         handleClose();
       })
       .catch(error => {
